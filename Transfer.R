@@ -397,7 +397,7 @@ for (t in 1:length(Trait_names)) {
       Partition = i, 
       NRMSE = tNRMSE_a, 
       Cor = tCor_a, 
-      Lambda.min = tlambda.min)
+      Lambda.min = tlambda.min_a)
     colnames(tnewresult_row)=c("Class", "Env", "Trait", "Model", "Partition", "NRMSE", "Cor", "Lambda.min")
     newResults <- rbind(newResults, tnewresult_row)
   }
