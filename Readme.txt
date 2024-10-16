@@ -65,8 +65,6 @@ Step 1) Run file 1 (TraditionalRidge.R) on the same location of the dataset to t
 -Image 1 ("Wheat_1_TraditionalRidge_YT_14_15toYT_13_14_Correlation_Plot.png") which compares the RR model to the ARR model in terms of Pearson's correlation
 -Image 2 (Wheat_1_TraditionalRidge_YT_14_15toYT_13_14_NRMSE_Plot.png) which compares the the RR model to the ARR model in terms of NRMSE. 
 
-
-
 -CSV 1 (Wheat_1_TraditionalRidge_YT_14_15toYT_13_14_Coef_10cv.csv) which contains the coeficients obtained for each partition and for each model
 -CSV 2 (Wheat_1_TraditionalRidge_YT_14_15toYT_13_14_Grpv_10cv.csv) which contains the fold indices used in the cross validation
 -CSV 3 (Wheat_1_TraditionalRidge_YT_14_15toYT_13_14_Result_10cv.csv) which contains the results (Cor, NRMSE and Lambda.min) for each model, per partition and per trait.
