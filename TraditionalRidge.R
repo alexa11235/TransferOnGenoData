@@ -42,8 +42,6 @@ dim(X)
 n=dim(X)[1]
 p=dim(xD1)[2]
 
-
-
 #I_1 is the identity matrix but with 0 at the a_00, sometimes referred to as D 
 I_1<- diag(c(0, rep(1, p)))
 
@@ -101,10 +99,11 @@ coef_df<-data.frame()
 allResults<-data.frame()
 allPredictions<-data.frame()
 
-### for loop for each trait
 R2v =  exp(seq(log(0.01),log(0.99),length=100))
 psxx = mean(apply(X[, -1],1,function(x)sum(x^2)))
 plambv = (1-R2v)/(R2v/psxx)#R2v
+
+### for loop for each trait
 for (t in 1:length(Trait_names)) {
   Y_proxy<-Y_proxydata[,t+2]
   Y_gold<-Y_golddata[,t+2]
@@ -265,6 +264,7 @@ write.csv(allResults, file = paste0(datalabel,"_TraditionalRidge_",transferlabel
 write.csv(allPredictions, file = paste0(datalabel,"_TraditionalRidge_",transferlabel,"Predictions_",nfold,"cv.csv"), row.names = FALSE)
 write.csv(coef_df, file = paste0(datalabel,"_TraditionalRidge_",transferlabel,"_Coef_",nfold,"cv.csv"), row.names = FALSE)
 write.csv(fold_indices, file = paste0(datalabel,"_TraditionalRidge_",transferlabel,"_Grpv_",nfold,"cv.csv"), row.names = FALSE)
+
 #### Plotting section ####
 
 corPlot<-ggplot(allResults[allResults$Class=="Gold",], aes(x = Model, y = Cor)) +
