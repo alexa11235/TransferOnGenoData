@@ -26,7 +26,6 @@ Geno<-Geno[intersect(Y_proxydata$GID, Y_golddata$GID),intersect(Y_proxydata$GID,
 
 
 #### Variable and data preparation section####
-###SVD of Geno
 X=svd(Geno)
 U=X$u
 d=X$d
@@ -124,21 +123,16 @@ for (t in 1:length(Trait_names)) {
     
     sxx = mean(apply(X_tr[,-1],1,function(x)sum(x^2)))
     lambv = (1-R2v)/(R2v/sxx)#R2v 
-  
-    
     
     n_p=length(training_indices)
     Grpv_k = findInterval(cut(sample(1:n_p, n_p), breaks=nfold), 1:n_p)
-    #pGrpv_k = findInterval(cut(sample(1:n_p, n_p), breaks=nfold), 1:n_p)
     newfoldrow<-data.frame(Trait_index=t, Partition=i, t(Grpv_k))
     fold_indices<-rbind(fold_indices, newfoldrow)
     
-    #Scaling step
     scalingfactor<-  mean(Y_tr)/mean(Y_proxy) 
     Y_tr<-Y_tr/scalingfactor
-    #The hope is to use the same folds across all 3 versions for Gold and compare them
-    #### Gold GLMnet section (No-Transfer)#####
-    
+
+    #### Gold Section (RR) #####
     
     Ridge <- cv.glmnet(
       x = X_tr[,-1],
@@ -162,11 +156,10 @@ for (t in 1:length(Trait_names)) {
     NRMSE <- (sqrt(mse(Y_tst, Ridgeprediction)))/mean(Y_tst)
     Cor <- cor(Y_tst, Ridgeprediction)
     
-    #Here we prepare and save the observed and predicted values to  allPredictions
+    #We prepare and save the observed and predicted values to  allPredictions
     newobserved_row <- data.frame(Env=Env_names[Gold_index], Trait=trait, predType="Observed", Partition=i, t(Y_tst)) 
     newprediction_row <- data.frame(Env=Env_names[Gold_index],Trait=trait, predType="RR", Partition=i, t(Ridgeprediction))
     allPredictions <- rbind(allPredictions, newobserved_row, newprediction_row)
-    #Here we add the row of glmnet results
     newresult_row <- data.frame(
       Class="Gold",
       Env=Env_names[Gold_index],
@@ -181,7 +174,7 @@ for (t in 1:length(Trait_names)) {
     allResults <- rbind(allResults, newresult_row)
     
     
-    #### Gold Transfer section and Gold ARR section (No-transfer) #####
+    #### Gold section (ARR) #####
     #vector for saving the averages MSEs for each lambda
     avgMSElambda<-c()
 
@@ -242,8 +235,7 @@ for (t in 1:length(Trait_names)) {
     anewprediction_row <- data.frame(Env=Env_names[Gold_index],Trait=trait, predType="ARR", Partition=i, t(analyticalprediction))
     allPredictions <- rbind(allPredictions, anewprediction_row)
     
-    # We evaluate and report on allResults
-    
+    # We evaluate and report on allResults  
     aNRMSE<-(sqrt(mse(Y_tst, analyticalprediction)))/mean(Y_tst)
     aCor <- cor(Y_tst, analyticalprediction)
     
@@ -308,14 +300,3 @@ NRMSEPlot<-ggplot(allResults[allResults$Class=="Gold",], aes(x = Model, y = NRMS
 
 ggsave(paste0(datalabel,"_TraditionalRidge_",transferlabel,"_NRMSE_Plot.png"), 
        plot = NRMSEPlot, device = "png", width = 2.5*length(Trait_names), height = 5, units = "in", dpi = 300)
-# library(ggplot2)
-# load("EYT_1.RData")
-# allResults=read.csv("EYT_1_Transfer_Bed5IRtoEHT_Result_10cv.csv")
-# Trait_names<-colnames(Pheno)[4:(ncol(Pheno))]
-# nfold<-10
-# datalabel <- "EYT_1"
-# Y_s <- Pheno[,3:ncol(Pheno)]
-# Env_names = unique(Y_s$Env)
-# transferlabel<-paste0(Env_names[1],"to",Env_names[2])
-# funky<-allResults[allResults$Class=="Gold"&(allResults$Model %in% c("RR", "Transfer_RR")),]
-
