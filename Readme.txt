@@ -3,10 +3,10 @@ This repository includes the code and datasets for the paper titled:
  "Harnessing Transfer Learning for Genomic Prediction Optimization"
 
 -----------------------------------------------------------------------------------------
+October 2024
 
 Last edited by Barajas Ramírez Eduardo 
                Montesinos Lopez Osval
-October 2024
 
 For any questions please contact oamontes1@ucol.mx or ebarajas2@ucol.mx
 --------------------------------------------------------------------------------------------
