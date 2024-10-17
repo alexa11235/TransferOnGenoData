@@ -277,7 +277,7 @@ for (t in 1:length(Trait_names)) {
         next
       }
       pinnerpred<-Prediction_ARR(X_innertesting_a, betahat)
-      aMSE_inner<-mse(Y_innertesting, pinnerpred)
+      aMSE_inner<-mse(Y_innertesting_a, pinnerpred)
       pinnerMSEs[l,k_p]<-aMSE_inner
       cat(trait, k_p, l,  "pinnerMSE:", aMSE_inner, "\n")
     }
