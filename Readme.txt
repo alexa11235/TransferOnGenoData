@@ -6,6 +6,7 @@ This repository includes the code and datasets for the paper titled:
 
 Last edited by Barajas Ramírez Eduardo 
                Montesinos Lopez Osval
+October 2024
 
 For any questions please contact oamontes1@ucol.mx or ebarajas2@ucol.mx
 --------------------------------------------------------------------------------------------
@@ -74,7 +75,7 @@ Step 1) Run file 1 (TraditionalRidge.R) on the same location of the dataset to t
 Step 2) Run file 2 (Transfer.R) on the same location of the dataset ("Wheat_1") to train the Transfer_RR and Transfer_ARR models. This outputs two more images -which now compare all 4 models- and completes and renames CSV 1, CSV 3, CSV 4.
 
 -Image 3 (Wheat_1_fullcompareTransfer_YT_14_15toYT_13_14_Correlation_Plot.png) Compares the 4 models (RR, ARR, Transfer_RR and Transfer_ARR) in terms of Pearson's correlation and should coincide statistically with Appendix Figure A4 (b)
--Image 4 (Wheat_1_fullcompareTransfer_YT_14_15toYT_13_14_NRMSE_Plot.png) Compares the 4 models (RR, ARR, Transfer_RR and Transfer_ARR) in terms of NRMSE and should coincide statistically with Appendix Figure A4 (b)
+-Image 4 (Wheat_1_fullcompareTransfer_YT_14_15toYT_13_14_NRMSE_Plot.png) Compares the 4 models (RR, ARR, Transfer_RR and Transfer_ARR) in terms of NRMSE and should coincide statistically with Appendix Figure A4 (d)
 
 -CSV 1 is now Wheat_1_PostTransfer_YT_14_15toYT_13_14_Coef_10cv and contains coeficients of all 4 models.
 -CSV 3 is now Wheat_1_PostTransfer_YT_14_15toYT_13_14_Result_10cv and contains results for all 4 models.
